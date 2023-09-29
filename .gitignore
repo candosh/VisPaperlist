@@ -1,0 +1,42 @@
+# Node.js build artifacts
+node_modules/
+dist/
+.cache/
+out-tsc/
+
+# Logs
+logs/
+*.log
+
+# OS-generated files
+.DS_Store
+Thumbs.db
+
+# IDE settings
+.idea/
+.vscode/
+
+# macOS
+.vscode/
+.DS_Store
+
+# Windows
+Thumbs.db
+Desktop.ini
+
+# Node.js debugging
+inspect.js
+
+# Dependency directories
+.jenkins/
+
+# Yarn
+yarn-error.log
+yarn.lock
+
+# TypeScript
+*.tsbuildinfo
+
+# Editor directories and files
+.idea/
+.vscode/
