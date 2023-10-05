@@ -1,4 +1,5 @@
 import "../styles/Home.css";
+import ButtonContent from "../components/mainButton";
 
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
@@ -95,8 +96,14 @@ function Search() {
         </div>
       </div>
       <div className="history-container">
-        <h3>- 검색 기록 -</h3>
-        <ul>
+        <h2>
+          Click on the paper
+          <br /> you are curious about!
+        </h2>
+        <div className="buttonContainer">
+          <ButtonContent />
+        </div>
+        {/*<ul>
           {list.map((item, index) => (
             <li key={index}>
               <span
@@ -118,7 +125,7 @@ function Search() {
             </li>
           ))}
           <button onClick={deleteAllList}>DeleteAllList</button>
-        </ul>
+              </ul>*/}
       </div>
       <div className="footer-container">
         <p className="footer-text">ⓒ VisPaperlist. All rights reserved.</p>
