@@ -6,14 +6,13 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 function Search() {
-  const [list, setList] = useState([]);
   const [name, setName] = useState("");
   const movePage = useNavigate();
 
-  const goResult = (pdf) => {
+  const goResult = (searchName) => {
     movePage("/searchResult", {
       state: {
-        pdfName: `${pdf}`,
+        paperName: name,
       },
     });
   };
@@ -42,31 +41,21 @@ function Search() {
       currentDate.getMonth() + 1
     }-${currentDate.getDate()} ${currentDate.getHours()}:${currentDate.getMinutes()}:${currentDate.getSeconds()}`;
 
-    const updatedList = [...list, { query: name, date: dateString }];
-    setList(updatedList);
+    // JSON 데이터에서 Title 값과 입력한 name을 비교하여 일치하는 결과를 검색
+    const searchResults = jsonData.filter((item) =>
+      item.Title.toLowerCase().includes(name.toLowerCase())
+    );
 
-    //로컬 스토리지에서 검색 기록을 저장
+    setList(updatedList);
+    setResults(searchResults); // 검색 결과를 상태 변수에 저장
+
+    // 로컬 스토리지에서 검색 기록을 저장
     localStorage.setItem("searchHistory", JSON.stringify(updatedList));
 
+    goResult(name); // 검색 결과 페이지로 이동
+
+    // name 상태를 업데이트한 후에 비워줌
     setName("");
-    goResult(name);
-  };
-
-  const deleteList = (index) => {
-    const updatedList = [...list];
-    updatedList.splice(index, 1);
-    setList(updatedList);
-
-    //로컬 스토리지에서 검색 기록을 저장
-    localStorage.setItem("searchHistory", JSON.stringify(updatedList));
-  };
-
-  const deleteAllList = () => {
-    const updatedList = [];
-    setList(updatedList);
-
-    //로컬 스토리지에서 검색 기록을 저장
-    localStorage.setItem("searchHistory", JSON.stringify(updatedList));
   };
 
   return (
@@ -90,9 +79,9 @@ function Search() {
             onKeyDown={(e) => activeEnter(e)}
             placeholder="🔍 Paper name or keywords..."
           ></input>
-          <button className="search-button" onClick={addList}>
-            Search
-          </button>
+          <Link to="/searchResult" state={{ paperName: name }}>
+            <button className="search-button">Search</button>
+          </Link>
         </div>
       </div>
       <div className="history-container">
@@ -103,29 +92,6 @@ function Search() {
         <div className="buttonContainer">
           <ButtonContent />
         </div>
-        {/*<ul>
-          {list.map((item, index) => (
-            <li key={index}>
-              <span
-                onClick={() => {
-                  goResult(item.query);
-                }}
-                className="query-item"
-              >
-                {item.query}
-              </span>
-              <span className="date-item">{item.date}</span>
-              <button
-                onClick={() => {
-                  deleteList(index);
-                }}
-              >
-                Delete
-              </button>
-            </li>
-          ))}
-          <button onClick={deleteAllList}>DeleteAllList</button>
-              </ul>*/}
       </div>
       <div className="footer-container">
         <p className="footer-text">ⓒ VisPaperlist. All rights reserved.</p>
