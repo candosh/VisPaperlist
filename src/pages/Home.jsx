@@ -1,5 +1,6 @@
 import "../styles/Home.css";
 import ButtonContent from "../components/mainButton";
+import jsonData from "../components/jsonData";
 
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
@@ -7,10 +8,10 @@ import { useNavigate } from "react-router-dom";
 
 function Search() {
   const [name, setName] = useState("");
-  const movePage = useNavigate();
+  const navigate = useNavigate();
 
   const goResult = (searchName) => {
-    movePage("/searchResult", {
+    navigate("/searchResult", {
       state: {
         paperName: name,
       },
