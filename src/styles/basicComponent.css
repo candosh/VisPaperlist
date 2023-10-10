@@ -1,11 +1,4 @@
-.search-app {
-  font-family: Arial, sans-serif;
-  background-color: #f5f5f5; /*white smoke*/
-  min-height: 100vh; /*요소의 최소 높이 지원*/
-  padding: 2em;
-}
-
-.center-fixed-container {
+.header {
   display: flex;
   flex-direction: column;
   align-items: center;
