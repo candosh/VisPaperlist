@@ -1,18 +1,38 @@
 import React, { useState, useEffect } from "react";
 import "../styles/searchResult.css";
-import { useParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 function SearchResult() {
+  const location = useLocation();
+  const { searchName, searchType, jsonData } = location.state;
   const [searchResults, setSearchResults] = useState([]);
-  const { name } = useParams(); // URL에서 검색어 추출
+  const searchText = searchName ? searchName.toLowerCase() : "";
 
   useEffect(() => {
-    // 검색 결과를 문자열로부터 파싱하여 가져옴
-    const searchResultsString = window.localStorage.getItem("searchResults");
-    if (searchResultsString) {
-      const parsedResults = JSON.parse(searchResultsString);
-      setSearchResults(parsedResults);
+    if (jsonData.length > 0) {
+      const results = jsonData.filter((item) => {
+        if (!item) {
+          return false;
+        }
+
+        if (searchType === "title" && item.title) {
+          return item.title.toLowerCase().includes(searchText);
+        } else if (searchType === "authors" && item.authors) {
+          return item.authors.toLowerCase().includes(searchText);
+        } else if (searchType === "abstract" && item.abstract) {
+          return item.abstract.toLowerCase().includes(searchText);
+        }
+
+        return false;
+      });
+      setSearchResults(results);
     }
+  }, [searchName, jsonData, searchType]);
+
+  useEffect(() => {
+    return () => {
+      setSearchResults([]);
+    };
   }, []);
 
   return (
@@ -29,8 +49,12 @@ function SearchResult() {
         </div>
       </div>
       <div className="search-result-container">
-        <h2 className="search-results-header">Search Results for: {name}</h2>
-        {searchResults.length > 0 ? (
+        <h2 className="search-results-header">
+          🔍 Search Results for {searchType}: "{searchName}"
+        </h2>
+        {searchResults === null ? (
+          <p>Loading...</p>
+        ) : searchResults.length > 0 ? (
           <div>
             {searchResults.map((result, index) => (
               <div key={index} className="search-result">
