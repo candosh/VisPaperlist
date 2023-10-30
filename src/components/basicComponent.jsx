@@ -1,5 +1,6 @@
 import React from "react";
 
+//기본 타이틀 컴포넌트
 function BasicComponent() {
   return (
     <div className="header">

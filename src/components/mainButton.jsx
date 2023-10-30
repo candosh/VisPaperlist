@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "../styles/mainButton.css";
 
+// 메인 홈 버튼 컴포넌트
 function App() {
   const [data, setData] = useState([]);
   const [papers, setPapers] = useState([]);
@@ -43,20 +44,14 @@ function App() {
   };
 
   return (
-    <div>
-      <div className="button-container">
+    <div className="button-container">
+      <div className="btn_box">
         <button
           onClick={() => handleButtonClick(1)}
           className={selectedButton === 1 ? "selected" : ""}
         >
           CHI
         </button>
-        {/* <button
-          onClick={() => handleButtonClick(2)}
-          className={selectedButton === 2 ? "selected" : ""}
-        >
-          VIS
-        </button> */}
         <button
           onClick={() => handleButtonClick(2)}
           className={selectedButton === 2 ? "selected" : ""}
@@ -116,18 +111,6 @@ function App() {
             <p>{console.log(papers)}</p>
           </div>
         )}
-        {/* {selectedButton === 2 && (
-          <div>
-            <p>
-              Visualization papers are presented in the field of information
-              visualization, exploring research on methods to visually represent
-              and interpret information.
-              <br /> InfoVis focuses on general information visualization,
-              SciVis on scientific data visualization, and VAST on visual
-              analysis and exploration.
-            </p>
-          </div>
-        )} */}
         {selectedButton === 2 && (
           <div>
             <p>

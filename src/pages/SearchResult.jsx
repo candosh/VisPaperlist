@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "../styles/searchResult.css";
 import { useLocation } from "react-router-dom";
 
+//검색 결과 페이지
 function SearchResult() {
   const location = useLocation();
   const { searchName, searchType, jsonData } = location.state;

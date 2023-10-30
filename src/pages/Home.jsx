@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import "../styles/Home.css";
 import BasicComponent from "../components/basicComponent";
-import ButtonContent from "../components/mainButton"; //
-import { Link } from "react-router-dom";
+import ButtonContent from "../components/mainButton";
+import InputContainer from "../components/InputContainer"; //검색 부분 컴포넌트로 뺌
 import { useNavigate } from "react-router-dom";
 
-function Search() {
+//메인 홈 페이지
+function Home() {
   const [name, setName] = useState("");
   const [searchType, setSearchType] = useState("title");
   const navigate = useNavigate();
@@ -49,30 +50,16 @@ function Search() {
     <div className="search-app">
       <div className="center-fixed-container">
         <BasicComponent />
-        <div className="input-container">
-          <input
-            className="inputName"
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            onKeyDown={(e) => activeEnter(e)}
-            placeholder="🔍 Paper name or keywords..."
-          ></input>
-          <select
-            className="search-type"
-            value={searchType}
-            onChange={(e) => setSearchType(e.target.value)}
-          >
-            <option value="title">Title</option>
-            <option value="authors">Author</option>
-            <option value="abstract">Abstract</option>
-          </select>
-          <button className="search-button" onClick={goResult}>
-            Search
-          </button>
-        </div>
+        <InputContainer
+          name={name}
+          setName={setName}
+          searchType={searchType}
+          setSearchType={setSearchType}
+          goResult={goResult}
+          activeEnter={activeEnter}
+        />
       </div>
-      <div className="history-container">
+      <div className="paperContent-container">
         <h2>
           Click on the paper
           <br /> you are curious about!
@@ -88,4 +75,4 @@ function Search() {
   );
 }
 
-export default Search;
+export default Home;
