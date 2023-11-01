@@ -3,6 +3,7 @@ import "../styles/Home.css";
 import BasicComponent from "../components/basicComponent";
 import ButtonContent from "../components/mainButton";
 import InputContainer from "../components/InputContainer"; //검색 부분 컴포넌트로 뺌
+import LandingHome from "../components/landingHome";
 import { useNavigate } from "react-router-dom";
 
 //메인 홈 페이지
@@ -59,13 +60,18 @@ function Home() {
           activeEnter={activeEnter}
         />
       </div>
+      <div className="topContent-container">
+        <LandingHome />
+      </div>
       <div className="paperContent-container">
-        <h2>
-          Click on the paper
-          <br /> you are curious about!
-        </h2>
-        <div className="buttonContainer">
-          <ButtonContent />
+        <div className="input-container">
+          <h2 className="input-text">
+            Click on the paper
+            <br /> you are curious about!
+          </h2>
+          <div className="buttonContainer">
+            <ButtonContent />
+          </div>
         </div>
       </div>
       <div className="footer-container">
