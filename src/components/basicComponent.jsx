@@ -1,11 +1,12 @@
 import React from "react";
+import logo from "../assets/main-logo.png";
 
 //기본 타이틀 컴포넌트
 function BasicComponent() {
   return (
     <div className="header">
       <div className="logo-container">
-        <img src="src/assets/main-logo.png" alt="no image" width="450" />
+        <img src={logo} alt="image" width="450" />
       </div>
       <div className="logo-under-container">
         <p className="logo-under-text">
