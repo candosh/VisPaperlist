@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import "../styles/searchResult.css";
 import { useLocation } from "react-router-dom";
+import BasicComponent from "../components/basicComponent";
 
-//검색 결과 페이지
+// 검색 결과 페이지
 function SearchResult() {
   const location = useLocation();
   const { searchName, searchType, jsonData } = location.state;
@@ -10,25 +11,22 @@ function SearchResult() {
   const searchText = searchName ? searchName.toLowerCase() : "";
 
   useEffect(() => {
-    if (jsonData.length > 0) {
+    if (jsonData && jsonData.length > 0) {
       const results = jsonData.filter((item) => {
         if (!item) {
           return false;
         }
 
-        if (searchType === "title" && item.title) {
-          return item.title.toLowerCase().includes(searchText);
-        } else if (searchType === "authors" && item.authors) {
-          return item.authors.toLowerCase().includes(searchText);
-        } else if (searchType === "abstract" && item.abstract) {
-          return item.abstract.toLowerCase().includes(searchText);
-        }
-
-        return false;
+        // 각 item에서 검색어가 포함된 필드가 있는지 확인합니다.
+        return Object.keys(item).some((key) => {
+          const value = item[key]?.toString().toLowerCase();
+          return value && value.includes(searchText);
+        });
       });
+
       setSearchResults(results);
     }
-  }, [searchName, jsonData, searchType]);
+  }, [searchName, jsonData]);
 
   useEffect(() => {
     return () => {
@@ -40,22 +38,14 @@ function SearchResult() {
     <div className="search-app">
       <div className="center-fixed-container">
         <div className="logo-container">
-          <img src="src/assets/main-logo.png" alt="no image" width="450" />
-        </div>
-        <div className="logo-under-container">
-          <p className="logo-under-text">
-            This page contains a list of CHI, Vis (InfoVis, SciVis, VAST), and
-            ETRA papers.
-          </p>
+          <BasicComponent />
         </div>
       </div>
       <div className="search-result-container">
         <h2 className="search-results-header">
           🔍 Search Results for {searchType}: "{searchName}"
         </h2>
-        {searchResults === null ? (
-          <p>Loading...</p>
-        ) : searchResults.length > 0 ? (
+        {searchResults.length > 0 ? (
           <div>
             {searchResults.map((result, index) => (
               <div key={index} className="search-result">
