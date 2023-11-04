@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "../styles/Home.css";
 import BasicComponent from "../components/basicComponent";
 import ButtonContent from "../components/mainButton";
@@ -11,28 +11,12 @@ function Home() {
   const [name, setName] = useState("");
   const [searchType, setSearchType] = useState("title");
   const navigate = useNavigate();
-  const [jsonData, setJsonData] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    fetch("/data.json")
-      .then((response) => response.json())
-      .then((data) => {
-        setJsonData(data);
-        setIsLoading(false);
-      })
-      .catch((err) => {
-        console.error("Error loading data:", err);
-        setIsLoading(false);
-      });
-  }, []);
 
   const goResult = () => {
     navigate("/searchResult", {
       state: {
         searchType: searchType,
         searchName: name,
-        jsonData: jsonData,
       },
     });
   };
@@ -42,10 +26,6 @@ function Home() {
       goResult();
     }
   };
-
-  if (isLoading) {
-    return <p>Loading...</p>;
-  }
 
   return (
     <div className="search-app">
