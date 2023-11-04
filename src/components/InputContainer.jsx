@@ -26,7 +26,7 @@ function InputContainer({
         onChange={(e) => setSearchType(e.target.value)}
       >
         <option value="title">Title</option>
-        <option value="authors">Author</option>
+        <option value="author">Author</option>
         <option value="abstract">Abstract</option>
       </select>
       <button className="search-button" onClick={goResult}>
