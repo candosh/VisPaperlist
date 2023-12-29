@@ -1,24 +1,56 @@
-.search-app {
+.search-result-page {
   font-family: Arial, sans-serif;
   background-color: #f5f5f5; /*white smoke*/
   min-height: 100vh; /*요소의 최소 높이 지원*/
-  padding: 2em;
+  padding: 1em;
 }
 
-.center-fixed-container {
-  display: flex;
+.header-container {
   flex-direction: column;
   align-items: center;
-  margin-bottom: 2em;
 }
 
 .logo-container {
-  margin-bottom: 0.5em;
+  margin: 0;
+  padding: 0;
+}
+
+/* .logo-under-container {
+  margin: 0;
+  padding: 0;
 }
 
 .logo-under-text {
   font-size: 15px;
   color: rgb(135, 135, 135);
+} */
+
+.result-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* 두 열로 구성 */
+  gap: 20px; /* 열 사이 간격 */
+  padding: 20px;
+}
+
+.left-panel,
+.right-panel {
+  background: #ffffff; /* 배경색 */
+  border: 1px solid #ddd; /* 테두리 */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 상자 그림자 */
+  border-radius: 4px; /* 모서리 둥글게 */
+  padding: 20px; /* 내부 패딩 */
+  overflow: hidden; /* 내부 내용이 넘치면 숨김 */
+}
+
+.panel-header {
+  background: #f2f2f2; /* 헤더 배경색 */
+  color: #333; /* 헤더 텍스트 색상 */
+  padding: 10px 15px; /* 내부 패딩 */
+  border-bottom: 1px solid #ddd; /* 하단 경계선 */
+  text-align: left; /* 텍스트 왼쪽 정렬 */
+  border-top-left-radius: 4px; /* 상단 왼쪽 모서리 둥글게 */
+  border-top-right-radius: 4px; /* 상단 오른쪽 모서리 둥글게 */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 상단에 그림자 효과 */
 }
 
 .search-result-container {
@@ -72,4 +104,18 @@
   font-size: 20px;
   color: #ff0000;
   margin-top: 20px;
+}
+
+.footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+}
+
+.footer-text {
+  font-size: 13px;
+  color: rgb(135, 135, 135);
 }

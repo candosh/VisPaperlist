@@ -3,6 +3,7 @@ import axios from "axios";
 import "../styles/searchResult.css";
 import { useLocation } from "react-router-dom";
 import BasicComponent from "../components/basicComponent";
+import logo from "../assets/main-logo.png";
 
 // 검색 결과 페이지
 function SearchResult() {
@@ -12,7 +13,7 @@ function SearchResult() {
 
   async function getPaper() {
     await axios
-      .get("/paper/", {
+      .get("/paper", {
         params: {
           search: searchType,
           query: searchName,
@@ -34,29 +35,50 @@ function SearchResult() {
   }, []);
 
   return (
-    <div className="search-app">
-      <div className="center-fixed-container">
+    <div className="search-result-page">
+      <div className="header-container">
         <div className="logo-container">
-          <BasicComponent />
+          <img src={logo} alt="image" width="175" />
+        </div>
+        {/* <div className="logo-under-container">
+          <p className="logo-under-text">
+            This page contains a list of CHI, Vis (InfoVis, SciVis, VAST), and
+            ETRA papers.
+          </p>
+        </div> */}
+      </div>
+
+      <hr></hr>
+
+      <div className="result-container">
+        <div className="left-panel">
+          <div className="panel-header">Left Panel Title</div>
+          test
+        </div>
+
+        <div className="right-panel">
+          <div className="panel-header">Right Panel Title</div>
+          <h2 className="search-results-header">
+            🔍 Search Results for {searchType}: "{searchName}"
+          </h2>
+          {searchResults.length > 0 ? (
+            <div>
+              {searchResults.map((result, index) => (
+                <div key={index} className="search-result">
+                  <h2>{result.title}</h2>
+                  <p className="authors">Authors: {result.author}</p>
+                  <p className="abstract">{result.abstract}</p>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <p className="no-results-message">검색 결과가 없습니다.</p>
+          )}
         </div>
       </div>
-      <div className="search-result-container">
-        <h2 className="search-results-header">
-          🔍 Search Results for {searchType}: "{searchName}"
-        </h2>
-        {searchResults.length > 0 ? (
-          <div>
-            {searchResults.map((result, index) => (
-              <div key={index} className="search-result">
-                <h2>{result.title}</h2>
-                <p className="authors">Authors: {result.author}</p>
-                <p className="abstract">{result.abstract}</p>
-              </div>
-            ))}
-          </div>
-        ) : (
-          <p className="no-results-message">검색 결과가 없습니다.</p>
-        )}
+
+      <div className="footer-container">
+        <p className="footer-text">ⓒ VisPaperlist. All rights reserved.</p>
       </div>
     </div>
   );
